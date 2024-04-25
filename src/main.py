@@ -1,20 +1,31 @@
-from yt_dlp import YoutubeDL
+from packages import DownloadVideo, DownloadPlaylist, DownloadAudio
+
+def menu():
+    print("1. Download Video")
+    print("2. Download Playlist")
+    print("3. DOwnload Only Audio")
+    print("4. Exit")
 
 def main():
-    # Ask the user for the URL
-    url = input("Enter the URL: ")
+    band = bool = True
 
-    # Options for the downloader
-    ydl_opts = {
-        'format': 'best',
-        'outtmpl': 'videos/%(title)s.%(ext)s'
-    }
+    while band:
+        menu()
+        choice = int(input("Enter your choice: "))
 
-    # Download the video
-    with YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
+        if choice == 1:
+            DownloadVideo.main()
 
-    print("Downloaded successfully!")
+        elif choice == 2:
+            DownloadPlaylist.main()
+
+        elif choice == 3:
+            DownloadAudio.main()
+
+        elif choice == 4:
+            break
+        else:
+            print("Invalid choice!")
 
 if __name__ == '__main__':
     main()
