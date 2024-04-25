@@ -1,56 +1,41 @@
+import sys
+sys.path.append('/path/to/root_directory')  # Ajusta esto al path correcto
+
 from packages import DownloadVideo, DownloadPlaylist, DownloadAudio
-from yt_dlp import YoutubeDL
 
 def menu():
     print("1. Download Video")
     print("2. Download Playlist")
-    print("3. DOwnload Only Audio")
+    print("3. Download Only Audio")
     print("4. Exit")
 
-def QualityVideo(url):
-    print("Fetching available formats...")
-    
-    with YoutubeDL() as ydl:
-        info_dict = ydl.extract_info(url, download=False)
-        formats = info_dict.get('formats', [info_dict])
-
-        for f in formats:
-            print(f"{f['format_id']}: {f['format_note']}")
-
-    fmt = input("Enter format id: ")
-
-    ydl_opts = {
-        'format': fmt,
-        'outtmpl': 'videos/%(title)s.%(ext)s'
-    }
-
-    with YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
-
-    print("Downloaded successfully!")
-
 def main():
-    band = bool = True
-
-    while band:
+    while True:
         menu()
-        choice = int(input("Enter your choice: "))
+        choice = input("[*] Enter your choice: ")
+        try:
+            choice = int(choice)
+        except ValueError:
+            print("[!] Please enter a valid number.")
+            continue
 
         if choice == 1:
-            DownloadVideo.main()
-            QualityVideo()
+            url = input("[*] Enter the video URL: ")
+            DownloadVideo.download_video(url)
 
         elif choice == 2:
-            DownloadPlaylist.main()
-            QualityVideo()
+            url = input("[*] Enter the playlist URL: ")
+            DownloadPlaylist.download_playlist(url)
 
         elif choice == 3:
-            DownloadAudio.main()
+            url = input("[*] Enter the audio URL: ")
+            DownloadAudio.download_audio(url)
 
         elif choice == 4:
+            print("[!] Goodbye!")
             break
         else:
-            print("Invalid choice!")
+            print("[!] Invalid choice!")
 
 if __name__ == '__main__':
     main()
