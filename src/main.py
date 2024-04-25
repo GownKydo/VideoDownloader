@@ -1,41 +1,40 @@
-import sys
-sys.path.append('/path/to/root_directory')
-
-from packages import DownloadVideo, DownloadPlaylist, DownloadAudio
+from packages import DownloadVideo
+from packages import DownloadPlaylist
+from packages import DownloadAudio
 
 def menu():
-    print("1. Download Video")
+    print("\n1. Download Video")
     print("2. Download Playlist")
     print("3. Download Only Audio")
-    print("4. Exit")
+    print("4. Exit\n")
 
 def main():
     while True:
         menu()
-        choice = input("[*] Enter your choice: ")
+        choice = input("\n[*] Enter your choice: ")
         try:
             choice = int(choice)
         except ValueError:
-            print("[!] Please enter a valid number.")
+            print("\nt[!] Please enter a valid number!")
             continue
 
         if choice == 1:
-            url = input("[*] Enter the video URL: ")
+            url = input("\n[*] Enter the video URL: ")
             DownloadVideo.download_video(url)
 
         elif choice == 2:
-            url = input("[*] Enter the playlist URL: ")
+            url = input("\n[*] Enter the playlist URL: ")
             DownloadPlaylist.download_playlist(url)
 
         elif choice == 3:
-            url = input("[*] Enter the audio URL: ")
+            url = input("\n[*] Enter the audio URL: ")
             DownloadAudio.download_audio(url)
 
         elif choice == 4:
-            print("[!] Goodbye!")
+            print("\n\t[!] Goodbye!")
             break
         else:
-            print("[!] Invalid choice!")
+            print("\n\t[!] Invalid choice!")
 
 if __name__ == '__main__':
     main()
