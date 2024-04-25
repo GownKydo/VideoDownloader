@@ -1,0 +1,6 @@
+{
+    // Specifies the folder where the Python interpreter is located
+    "python.analysis.extraPaths": [
+        "./src/packages" // Path to the folder containing the package
+    ]
+}
