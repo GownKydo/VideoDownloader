@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/path/to/root_directory')  # Ajusta esto al path correcto
+sys.path.append('/path/to/root_directory')
 
 from packages import DownloadVideo, DownloadPlaylist, DownloadAudio
 
