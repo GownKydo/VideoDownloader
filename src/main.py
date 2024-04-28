@@ -19,19 +19,19 @@ def main():
             continue
 
         if choice == 1:
-            url = input("\n[*] Enter the video URL: ")
+            url = input("[*] Enter the video URL: ")
             DownloadVideo.download_video(url)
 
         elif choice == 2:
-            url = input("\n[*] Enter the playlist URL: ")
+            url = input("[*] Enter the playlist URL: ")
             DownloadPlaylist.download_playlist(url)
 
         elif choice == 3:
-            url = input("\n[*] Enter the audio URL: ")
+            url = input("[*] Enter the audio URL: ")
             DownloadAudio.download_audio(url)
 
         elif choice == 4:
-            print("\n\t[!] Goodbye!")
+            print("\t[!] Goodbye!")
             break
         else:
             print("\n\t[!] Invalid choice!")
