@@ -1,40 +1,20 @@
-from packages import DownloadVideo
-from packages import DownloadPlaylist
-from packages import DownloadAudio
+from yt_dlp import YoutubeDL
+import os
 
-def menu():
-    print("\n1. Download Video")
-    print("2. Download Playlist")
-    print("3. Download Only Audio")
-    print("4. Exit\n")
+def download_video(url):
+    print("\n[*] Fetching video information...")
+    
+    try:
+        ydl_opts = {
+            'format': 'bestvideo+bestaudio/best',
+            'outtmpl': os.path.join('videos', '%(title)s.%(ext)s'),
+            'merge_output_format': 'mp4',
+        }
 
-def main():
-    while True:
-        menu()
-        choice = input("\n[*] Enter your choice: ")
-        try:
-            choice = int(choice)
-        except ValueError:
-            print("\nt[!] Please enter a valid number!")
-            continue
+        with YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
 
-        if choice == 1:
-            url = input("[*] Enter the video URL: ")
-            DownloadVideo.download_video(url)
+        print("\n[*] Downloaded successfully!")
 
-        elif choice == 2:
-            url = input("[*] Enter the playlist URL: ")
-            DownloadPlaylist.download_playlist(url)
-
-        elif choice == 3:
-            url = input("[*] Enter the audio URL: ")
-            DownloadAudio.download_audio(url)
-
-        elif choice == 4:
-            print("\t[!] Goodbye!")
-            break
-        else:
-            print("\n\t[!] Invalid choice!")
-
-if __name__ == '__main__':
-    main()
+    except Exception as e:
+        print(f"\n[!] An error occurred: {e}")
