@@ -15,26 +15,26 @@ Before you begin, ensure you have Python installed on you machine [Python Downlo
 #### For Arch Linux Users
 
 ```bash
-    sudo pacman -S yt-dlp
+sudo pacman -S yt-dlp
 ```
 
 #### For Other Linux Users
 
 ```bash
-    sudo pip install yt-dlp
+sudo pip install yt-dlp
 ```
 
 #### For Windows Bugs Users
 
 ```bash
-    pip install yt-dlp
+pip install yt-dlp
 ```
 
 ## Step 2: Clone repository
 
 ``` bash
-    git clone https://github.com/corniergown/VideoDownload.git
-    cd VideoDownloader
+git clone https://github.com/corniergown/VideoDownload.git
+cd VideoDownloader
 ```
 
 <br>
@@ -47,7 +47,11 @@ To run the Video Downloader, navigate to the project directory and run the follo
 
 ### Image
 
+<center>
+
 ![Menu](/img/image.png)
+
+</center>
 
 <br>
 
