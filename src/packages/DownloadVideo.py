@@ -1,10 +1,11 @@
 from yt_dlp import YoutubeDL
+import os
 
 def download_video(url):
     print("[*] Fetching available formats...")
     
-    with YoutubeDL() as ydl:
-        try:
+    try:
+        with YoutubeDL() as ydl:
             info_dict = ydl.extract_info(url, download=False)
             formats = info_dict.get('formats', [info_dict])
 
@@ -15,16 +16,22 @@ def download_video(url):
             for f in formats:
                 print(f"{f['format_id']}: {f['format_note']} - {f.get('resolution', 'Unknown resolution')}")
 
-            fmt = input("[*] Enter format id: ")
+            while True:
+                fmt = input("[*] Enter format id (or 'q' to quit): ")
 
-            # Check if the selected format is in the list
-            if not any(f['format_id'] == fmt for f in formats):
-                print("Invalid format selected.")
-                return
+                if fmt == 'q':
+                    print("[*] Exiting...")
+                    return
+
+                # Check if the selected format is in the list
+                if any(f['format_id'] == fmt for f in formats):
+                    break
+                else:
+                    print("Invalid format id. Please try again.")
 
             ydl_opts = {
                 'format': fmt,
-                'outtmpl': 'videos/%(title)s.%(ext)s'
+                'outtmpl': os.path.join('videos', '%(title)s.%(ext)s')
             }
 
             with YoutubeDL(ydl_opts) as ydl:
@@ -32,6 +39,5 @@ def download_video(url):
 
             print("[*] Downloaded successfully!")
 
-        except Exception as e:
-            print(f"[!] An error occurred: {e}")
-
+    except Exception as e:
+        print(f"[!] An error occurred: {e}")
