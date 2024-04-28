@@ -2,6 +2,8 @@ from packages import DownloadVideo
 from packages import DownloadPlaylist
 from packages import DownloadAudio
 
+import os
+
 def menu():
     print("\n1. Download Video")
     print("2. Download Playlist")
@@ -10,8 +12,11 @@ def menu():
 
 def main():
     while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+
         menu()
         choice = input("\n[*] Enter your choice: ")
+        
         try:
             choice = int(choice)
         except ValueError:
@@ -21,6 +26,7 @@ def main():
         if choice == 1:
             url = input("[*] Enter the video URL: ")
             DownloadVideo.download_video(url)
+            os.system('cls' if os.name == 'nt' else 'clear')
 
         elif choice == 2:
             url = input("[*] Enter the playlist URL: ")
