@@ -1,42 +1,29 @@
 from yt_dlp import YoutubeDL
+from tarfile import ExtractError
+from yt_dlp.utils import DownloadError
 import os
 
 def download_video(url):
-    print("\n[*] Fetching available formats...")
+    print("\n[*] Fetching video information...")
     
     try:
-        with YoutubeDL() as ydl:
-            info_dict = ydl.extract_info(url, download=False)
-            formats = info_dict.get('formats', [info_dict])
+        ydl_opts = {
+            'format': 'bestvideo+bestaudio/best',
+            'outtmpl': os.path.join('videos', '%(title)s.%(ext)s'),
+            'merge_output_format': 'mp4',
+        }
 
-            if not formats:
-                print("[!] No available formats found.")
-                return
+        with YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
 
-            print("[*] Available formats:")
-            for f in formats:
-                print(f"{f['format_id']}: {f['format_note']} - {f.get('resolution', 'Unknown resolution')}")
+        print("\n[*] Downloaded successfully!")
 
-            fmt = None
-            while True:
-                fmt = input("\n[*] Enter format id (or 'q' to quit): ").strip()
-                if fmt.lower() == 'q':
-                    print("[*] Exiting...")
-                    return
+    except DownloadError as de:
+        print(f"[!] Failed to download the video: {de}")
 
-                if any(f['format_id'] == fmt for f in formats):
-                    break
-                print("[!] Invalid format id. Please try again.")
-
-            ydl_opts = {
-                'format': fmt,
-                'outtmpl': os.path.join('videos', '%(title)s.%(ext)s')
-            }
-
-            with YoutubeDL(ydl_opts) as ydl:
-                ydl.download([url])
-
-            print("\n[*] Downloaded successfully!")
-
+    except ExtractError as ee:
+        print(f"[!] Error extracting video information: {ee}")
+        
     except Exception as e:
-        print(f"\n[!] An error occurred: {e}")
+        print(f"[!] An unexpected error occurred: {e}")
+
