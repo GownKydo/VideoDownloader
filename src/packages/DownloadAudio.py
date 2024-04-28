@@ -12,4 +12,4 @@ def download_audio(url):
     }
     with YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
-    print("Audio downloaded successfully!")
+    print("[*] Audio downloaded successfully!")

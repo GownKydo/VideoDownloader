@@ -19,11 +19,11 @@ def download_video(url):
         print("\n[*] Downloaded successfully!")
 
     except DownloadError as de:
-        print(f"[!] Failed to download the video: {de}")
+        print(f"\n[!] Failed to download the video: {de}")
 
     except ExtractError as ee:
-        print(f"[!] Error extracting video information: {ee}")
-        
+        print(f"\n[!] Error extracting video information: {ee}")
+
     except Exception as e:
-        print(f"[!] An unexpected error occurred: {e}")
+        print(f"\n[!] An unexpected error occurred: {e}")
 
