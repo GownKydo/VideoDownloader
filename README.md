@@ -33,7 +33,7 @@ pip install yt-dlp
 ## Step 2: Clone repository
 
 ``` bash
-git clone https://github.com/corniergown/VideoDownload.git
+git clone https://github.com/corniergown/YT-VideoDownload.git
 cd VideoDownloader
 ```
 
